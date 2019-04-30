@@ -1,0 +1,15 @@
+func (e *Event) Scan(val interface{}) (err error){
+	if stringStatus, ok := val.([]byte); ok {
+		err := json.Unmarshal(stringStatus, e)
+		if err != nil {
+			return err
+		}
+		return nil
+	} else {
+		return errors.New("scan failed")
+	}
+}
+func (e Event)  Value() (driver.Value, error){
+	r, _ := json.Marshal(e)
+	return r, nil
+}
